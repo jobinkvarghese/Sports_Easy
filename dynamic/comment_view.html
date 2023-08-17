@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<div id="myDiv" class="cardm" style="display:none;">
+    <ul>
+     {% if cmnt %}
+     {% for j in cmnt %}
+     {% if j.post.id == i.id and j.comment != '' %}
+     
+     <li>{{j.user.fname}}&nbsp;{{j.user.lname}}:&nbsp<p>
+         {{ j.comment}}</li>
+     <br>
+     {% endif %}
+     {% endfor %}{% endif %}
+     </ul>
+
+ </div>
+</body>
+</html>

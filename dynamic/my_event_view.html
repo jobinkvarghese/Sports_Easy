@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        .card-row {
+        display: flex;
+        justify-content: space-between;
+      }
+  
+      .card {
+        width: 25%;
+        height:1000px;
+        padding: 20px;
+        border: 3px solid #c9c9c9;
+        border-color: #110f12;
+       background-image: url({% static 'images/cardbg.webp' %});
+        
+        border-radius: 7px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+        float: left;
+      }
+      h6{
+        color: aliceblue;
+      }
+      #scrollable {
+			height: 900px; /* set the desired height of the division */
+			overflow: auto; /* make the division scrollable */
+		}
+    
+    </style>
+</head>
+<body style="background-color: black; background-image: url({% static 'images/walle.jpg' %}); background-repeat:no-repeat;background-size:cover">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark" style="background-image: url('{% static 'images/item3.jpg' %}');">
+        <a class="navbar-brand" style="color: rgb(244, 100, 10);font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" href="#">SPORTS EASY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" style="color: white;" href="event_home">Home <span class="sr-only">(current)</span></a>
+            </li>
+          
+                <a class="nav-link"  style="color: white;" href="my_event_view">My Events</a>
+              </li>
+            
+            
+         
+              
+        
+          </ul>
+        </div>
+        <form class="form-inline my-2 my-lg-0">
+          <a class="nav-link"  style="color:red;" href="/user_logout">LOGOUT</a>
+        </form>
+      </div>
+      </nav>
+      {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+      {% endfor %}
+  {% endif %}
+  
+    
+    {% for i in view %}
+    <div class="card rounded">
+      <form action="/update_event" method="POST" class="card-body">
+        {% csrf_token %}
+       
+      <img  src="{{i.eimage.url}}" style="width:100%; height: 220px;" class="rounded m-3 shadow border p-3">
+      <div class="bg-warning p-3 m-2" >
+        <h4 style="color: rgb(11, 8, 8);margin-top:9px; " >Name:&nbsp;<b>{{i.ename}}</b></h5>
+          <div style="height: 80px;" id="scrollable">
+            <h5>Details</h5>
+        <p style="color: rgb(8, 5, 5);"  >{{i.details}}</p></div>
+       
+
+      </div>
+       
+        <h6 style="color: rgb(25, 15, 15);" >Ticket amount: {{i.ticket_amount}}</h6>
+        <h6 style="color: rgb(15, 9, 9);" >Event id: {{i.id}}</h6>
+        <h6 style="color: rgb(15, 9, 9);" >Mobile: {{i.mobile}}</h6>
+        <h6 style="color: rgb(15, 9, 9);" >email: {{i.eemail}}</h6>
+        <h6 style="color: rgb(15, 9, 9);" >Event date: {{i.edate}}</h6>
+        <h6 style="color: rgb(15, 9, 9);" >Event Location: <a href="{{i.eloc}}" >{{i.eloc}}</a></h6>
+        <h6 style="color: rgb(15, 9, 9);" >Event Address: {{i.eaddress}}</h6>
+        <h6 style="color: rgb(15, 9, 9);" >Total  No Tickets: {{i.ticket}}</h6>
+        <h6 style="color: rgb(15, 9, 9);" >Current Available Tickets: {{i.avl_tickets}}</h6>
+        <h6 style="color: rgb(15, 9, 9);" >Event Status: {{i.status}}</h6>
+         <input type="text"  name="sts" required/>
+         <input type="number"  name="idn" value="{{i.id}}" hidden/>
+
+        
+       
+    
+  
+      <div class="m-3 p-2">
+      <button type="submit" class="btn btn-success" name="btn" value="Update">UPDATE</button>
+      <a href="/eventDelete?idno={{i.id}}" class="btn btn-danger">Delete</a>
+      </div>
+    </div></form>{% endfor %}
+</body>
+</html>

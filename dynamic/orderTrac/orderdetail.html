@@ -1,0 +1,51 @@
+{% extends '../Admin_home.html' %}
+{% load static %} 
+
+{% block content %} 
+<div class="container">
+    <div class="row">
+        <div class="col">
+           <table class="table table-striped">
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <td>Action</td>
+
+
+            </tr>
+            {% for p in order %} 
+            <tr>
+                <td>
+                    {{p.product_name}}
+                </td>
+                <td>
+                    {{p.quantity}}
+                </td>
+                <td>
+                    {{p.price}}
+                </td>
+
+        <td class="text-danger">
+            {{p.status}}<br>
+            <form method="post" action="order_update">
+                {% csrf_token %}
+                <input type="text" name="ord" value="{{p.order_number}}" id="" hidden>
+                <input type="text" name="ordid" value="{{p.id}}" id="" hidden>
+              <select name="sts" id="" class="form-control">
+                <option value="Pending">Pending</option>
+                <option value="Out For Shipping">Out For Shipping</option>
+                <option value="Completed">Completed</option>
+              </select>
+            <Button class="btn btn-primary mt-3" type="submit">Update</Button>
+            </form>
+        </td>
+    
+            </tr>
+            {% endfor %}
+           </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

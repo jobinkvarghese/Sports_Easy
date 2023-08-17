@@ -1,0 +1,31 @@
+{% extends 'Admin_home.html' %}
+{% load static %}
+{% block content %}
+<div class="container" >
+  
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-striped border mt-3 p-3 rounded">
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>Subject</th> <th>Message</th>
+                    <th>Created Date</th>
+                </tr>
+                {% for ls in data %} 
+                <tr>
+                    <td>
+                        {{ls.name}}
+                    </td>
+                    <td><a href="mailto:{{ls.email}}">click to replay {{ls.email}}</a></td><td>{{ls.subject}}</td> <td>{{ls.message}}</td> <td>{{ls.created_date}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+ </div>
+{% endblock %}

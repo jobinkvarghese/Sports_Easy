@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Response</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      border-radius: 5px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .response {
+      margin-top: 30px;
+      text-align: center;
+    }
+    .success {
+      color: green;
+    }
+    .failure {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Payment Response</h1>
+    <div class="response">
+      <p class="success">Payment successful! Thank you for your purchase. check your email<br> <a href="/my_order">back to home</a></p>
+      <!-- Or use the following line for a failed payment response -->
+      <!-- <p class="failure">Payment failed! Please try again.</p> -->
+    </div>
+  </div>
+</body>
+</html>

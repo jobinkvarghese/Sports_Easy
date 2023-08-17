@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+   <!-- Basic -->
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <!-- Mobile Metas -->
+   <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   <!-- Site Metas -->
+   <title>Game Info</title>
+   <meta name="keywords" content="">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <!-- Site Icons -->
+   <link rel="shortcut icon" href="" type="image/x-icon" />
+   <link rel="apple-touch-icon" href="">
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+   <!-- Site CSS -->
+   <link rel="stylesheet" href="style.css">
+   <!-- Colors CSS -->
+   <link rel="stylesheet" href="{% static 'css/colors.css' %}">
+   <!-- ALL VERSION CSS -->	
+   <link rel="stylesheet" href="{% static 'css/versions.css' %}">
+   <!-- Responsive CSS -->
+   <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+   <!-- Custom CSS -->
+   <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+   <!-- font family -->
+   <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+   <!-- end font family -->
+   <link rel="stylesheet" href="{% static 'css/3dslider.css' %}" />
+   <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+   <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+   <script src="{% static 'js/3dslider.js' %}"></script>
+   <style>
+      li{
+         color: rgb(217, 207, 207);
+         margin-left: 5px;
+      }
+      a {
+        font-size: 20px;
+        margin-left: 5px; 
+      
+        
+			   text-decoration: none;
+        
+        
+		}
+		/* Define the hover link styles */
+		a:hover {
+			color: rgb(252, 247, 247);
+			text-decoration: none;
+		}
+    
+	
+   </style>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+   </head>
+   <body class="game_info"  style="background-color: black;"data-spy="scroll" data-target=".header">
+      <!-- LOADER -->
+     
+      <nav  style="border: 1p solid;border-color: aliceblue;margin-top: 3px;margin: 2px;  background-image: url({% static 'images/item3.jpg' %});"  class="navbar navbar-expand-lg navbar-light bg-dark">
+         <a class="navbar-brand" style="color: rgb(255, 102, 20);font-size: 30px;  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" href="#">SPORTS EASY</a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+         </button>
+       
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+           <ul class="navbar-nav mr-auto">
+             <li class="nav-item " style="margin-top: 12px;">
+               <a   href="User_reg">User</a>
+             </li>
+             <li class="nav-item" style="margin-top: 12px;color: aliceblue;">
+               <a   href="Event_manager_reg_view">Event</a>
+             </li>
+             <li class="nav-item" style="margin-top: 12px;">
+               <a href="Academy_reg">Academy</a></li>
+               </li>
+               <li class="nav-item" style="margin-top: 12px;">
+                  <a  href="Turf_reg">Turf</a>
+               </li>
+               <li class="nav-item" style="margin-top: 12px;">
+                  <a  href="itemseller_reg">Itemseller</a>
+               </li>
+            
+         
+           </ul>
+           
+         </div>
+       </nav>
+       <div style="float: left;border: 1px solid;border-color: rgb(134, 134, 133);" >
+       <img src="{% static 'images/index4.gif' %}" style="width: 300px;height: 300px;border: 2px solid;border-color: black;">
+       <img src="{% static 'images/index8.gif' %}" style="width: 300px;height: 300px;">
+       <img src="{% static 'images/index6.gif' %}" style="width: 300px;height: 300px;">
+       <img src="{% static 'images/index10.gif' %}" style="width: 300px;height: 300px;">
+       <img src="{% static 'images/index9.gif' %}" style="width: 300px;height: 300px;"></div>
+       <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+         <div class="carousel-inner">
+           <div class="carousel-item active">
+             <img class="d-block w-100" src="{% static 'images/basket.jpg' %}" style="border: 4px solid;border-color:black ;"  height="1000px" alt="First slide">
+           </div>
+           <div class="carousel-item">
+             <img class="d-block w-100" src="{% static 'images/cart5.jpg' %}" alt="Second slide">
+           </div>
+           <div class="carousel-item">
+            <figure> <img class="d-block w-100" src="{% static 'images/qts.jpg' %}" alt="Third slide">
+             <h3>syam is good</h3></figure>
+
+           </div>
+         </div>
+         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+           <span class="sr-only">Previous</span>
+         </a>
+         <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+           <span class="carousel-control-next-icon" aria-hidden="true"></span>
+           <span class="sr-only">Next</span>
+         </a>
+       </div>
+
+   </body>
+</html>

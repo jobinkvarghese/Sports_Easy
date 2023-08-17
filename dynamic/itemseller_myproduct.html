@@ -1,0 +1,101 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </head>
+  <style>
+      .card-row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .card {
+      width: 25%;
+        height:700px;
+        padding: 20px;
+        border-radius: 20px;
+        float: left;
+        border: 3px solid #c9c9c9;
+        border-color: rgb(207, 204, 201);
+        background-image: url({% static 'images/card11.jpg' %});
+    }
+    #scrollable {
+			height: 900px; /* set the desired height of the division */
+			overflow: auto; /* make the division scrollable */
+		}
+    #mlink:hover{
+        color: blue;
+        text-decoration: underline;
+      }
+  </style>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark" style="background-image: url('{% static 'images/item3.jpg' %}');">
+    <a class="navbar-brand" style="color: rgb(244, 100, 10);font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" href="#">SPORTS EASY</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" id="mlink" style="color: white;" href="itemseller_home_view">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  id="mlink"  style="color: white;" href="product_upload">Product Upload</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"  id="mlink"  style="color: white;" href="product_view">My Products</a>
+          </li>
+          
+          
+    
+      </ul>
+    </div>
+    <form class="form-inline my-2 my-lg-0">
+      <a class="nav-link"  style="color:red;" href="/user_logout">LOGOUT</a>
+    </form>
+  </div>
+  </nav>
+
+<form action="product_view" method="POST" class="card-body">
+    {% csrf_token %}
+    {% for i in view %}
+  <div class="card">
+  
+    <img  src="{{i.productimage.url}}"  style="border: 3px;border-radius: 10px;" width="100%" height="50%" >
+    <div style="height: 100px;">
+      <h5 style="color: aliceblue;">{{i.productname}}</h5>
+      <div style="height: 80px;" id="scrollable">
+      <p style="color: aliceblue;" >{{i.productdetails}}</p></div>
+    </div>
+    <ul class="list-group list-group-flush" style="margin-top: 5px;">
+      <li class="list-group-item">Product amount: {{i.productamount}}</li>
+      <li class="list-group-item">brand name: {{i.sellername}}</li>
+      <li class="list-group-item">seller name: {{i.seller.sellername}}</li>
+     
+    </ul>
+    <script>
+      function prdDelete(idn){
+    
+        var ans=confirm("Do u want to Delete?")
+        
+        if(ans==true){
+          window.location.href="/productDelete?idn="+idn;
+        }else{
+          window.location.href="/product_view"
+        }
+   
+
+      }
+    </script>
+
+    <div style="margin-top: 10px;">
+ <a href="/edit?idn={{i.id}}" class="btn btn-success">Update</a>
+    <button type="button" class="btn btn-danger" onclick="prdDelete({{i.id}})">Delete</button>
+ 
+    </div>
+  </div>{% endfor %}</form></body></html>

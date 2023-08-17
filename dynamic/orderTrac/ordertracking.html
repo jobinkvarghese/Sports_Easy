@@ -1,0 +1,12 @@
+{% load static %}
+
+<form method="post" action="order_update_status">
+    {% csrf_token %}
+    <label for="status">Update Order Status:</label>
+    <select name="status" id="status">
+      <option value="PLACED">Order Placed</option>
+      <option value="SHIPPING">Shipping</option>
+      <option value="DELIVERED">Delivered</option>
+    </select>
+    <button type="submit">Update</button>
+  </form>

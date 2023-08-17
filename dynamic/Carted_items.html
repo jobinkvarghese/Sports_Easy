@@ -1,0 +1,189 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        .card-row {
+        display: flex;
+        justify-content: space-between;
+      }
+  
+      .card {
+        width: 25%;
+        height:600px;
+        padding: 20px;
+        border: 3px solid #c9c9c9;
+        border-color: #110f12;
+       background-image: url({% static 'images/cardbg.webp' %});
+        
+        border-radius: 7px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+        float: left;
+      }
+      #scrollable {
+			height: 900px; /* set the desired height of the division */
+			overflow: auto; /* make the division scrollable */
+		}
+    </style>
+</head>
+<body style="background-image:url('{% static 'images/si.jpg' %}');">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark" style="background-image: url('{% static 'images/item3.jpg' %}');">
+        <a class="navbar-brand" style="color: rgb(233, 121, 9);font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" href="#">SPORTS EASY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" style="color: white;" href="user_home_view">HOME <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  style="color: white;" href="sports_items">Sports Items</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  style="color: white;" href="cart_view">Cart_items</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  style="color: white;" href="my_order">My Orders</a>
+            </li>
+             
+        
+        
+          </ul>
+          
+        </div>
+      </nav> 
+      <div class="container">
+        <!-- <div class="row">
+          <div class="col">
+    <form action="cart_view" method="POST" class="card-body">
+        {% csrf_token %}
+    
+        {% for i in cart %}
+        <div class="card">
+         
+          <img  src="{{i.product.productimage.url}}" style="border: 3px;border-radius: 10px;border-color: black;" width="50%" height="50%">
+          <div >
+            
+            <h5 >{{i.product.productname}}</h5>
+            <div style="height: 80px;" id="scrollable">
+            <p >{{i.product.productdetails}}</p></div>
+    
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" >Product amount: {{i.product.productamount}}</li>
+            <li class="list-group-item">Product id: {{i.product.id}}</li>
+            <li class="list-group-item">seller name: {{i.product.seller.sellername}}</li> 
+            <li class="list-group-item" >product brand: {{i.product.sellername}}</li> 
+            <li class="list-group-item">seller  id: {{i.product.sellerid}}</li>
+            
+           
+          </ul>
+         <br>
+          <div>
+          <button  type="submit" style="border-radius: 8PX;background-color: burlywood;border-color: burlywood;box-shadow: yellow;"> <a href="/booking?idn={{i.product.id}}&status={{i.product.status}}" class="card-link" style="color: red;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">BUY NOW</a></button> 
+          <button onclick="myfunction" style="border-radius: 8PX;background-color: burlywood;border-color: burlywood;box-shadow: tomato;">   <a href="/remove_from_cart?idn={{i.id}}" class="card-link" style="color:  red;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">REMOVE FROM CART</a></button>
+          </div>
+          <div>
+
+          </div>
+        </div>{% endfor %}</form>
+
+      </div>
+    </div> -->
+
+<br>
+<hr>
+
+  <div class="row">
+    <div class="col">
+      <form action="/newpayment" method="post">
+        {% csrf_token %}
+      <div style="color:whitesmoke;"> 
+        <table class="table table-striped">
+
+<tr>
+<th>
+product name/image
+</th>
+<th>
+  Quantity
+</th>
+<th>
+single product Price
+</th>
+<th>
+  Net Price
+</th>
+<th>
+user name
+</th>
+<th>
+Action
+</th>
+
+</tr>
+{% for ls in  newcart %}
+
+<tr>
+
+<td>
+ <i class="text-uppercase">{{ls.product.productname}} </i>
+<br>
+<img src="{{ls.product.productimage.url}}" style="width:120px;height:90px" class="rounded m-3 shadow border"/>
+</td>
+<td>
+  {{ls.qty}}
+</td>
+<td>
+{{ls.product.productamount}}
+</td>
+<td>
+  {{ls.netprice}}
+</td>
+<td>
+{{ls.userid.fname}}
+<input type="text" name="itemseller" id="" value="{{ls.product.seller.id}}" hidden >
+</td>
+<td>
+<a href="/nwcrtdelete?nwid={{ls.id}}">Delete</a>
+</td>
+</tr>
+
+
+
+
+
+
+{% endfor %}
+<tr>
+
+  <td colspan="3">Total Price</td>
+  <td> <input type="text" name="ntprice" id="" value="{{netprice}}" hidden>{{netprice}}</td>
+  <td>
+{% if 1 in pay %}
+ <button  type="submit" class="btn btn-info form-control">Pay Process</button>
+ {% endif %}
+  </td>
+
+</tr>
+
+
+        </table>
+      </form>
+   </div>
+    </div>
+  </div>
+</div>
+    
+</body>
+</html>

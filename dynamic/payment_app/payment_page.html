@@ -1,0 +1,15 @@
+<!-- payment_app/templates/payment_app/payment_page.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Page</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <label for="amount">Enter amount:</label>
+        <input type="text" id="amount" name="amount" required>
+        <button type="submit">Pay Now</button>
+    </form>
+</body>
+</html>

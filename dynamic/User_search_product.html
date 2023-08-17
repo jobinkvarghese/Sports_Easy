@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        .card-row {
+        display: flex;
+        justify-content: space-between;
+      }
+  
+      .card {
+        width: 25%;
+        height:550px;
+        padding: 20px;
+        border: 3px solid #c9c9c9;
+        border-color: #110f12;
+       background-image: url({% static 'images/cardbg.webp' %});
+        
+        border-radius: 7px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+        float: left;
+      }
+      h6{
+        color: aliceblue;
+      }
+      #scrollable {
+			height: 900px; /* set the desired height of the division */
+			overflow: auto; /* make the division scrollable */
+		}
+    #mlink:hover{
+        color: blue;
+        text-decoration: underline;
+      }
+    </style>
+</head>
+<body style="background-color: black; background-image: url({% static 'images/walle.jpg' %}); background-repeat:no-repeat;background-size:cover">
+    <nav class="navbar navbar-expand-lg navbar-light border 3px border-color white " style="border: 1p solid;border-color: aliceblue;margin-top: 3px;margin: 2px;  background-image: url({% static 'images/item3.jpg' %});"  class="navbar navbar-expand-lg navbar-light bg-dark">
+        <a class="navbar-brand" style="color: rgb(242, 74, 8);font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" href="#">SPORTS EASY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse"  id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active" >
+              <a class="nav-link" id="mlink" style="color: white;" href="user_home_view" ><h6 style="color: rgb(239, 233, 233);">HOME </h6><span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="mlink"  style="color: white;" href="sports_items"><h6 style="color: rgb(254, 247, 247);">Sports Items</h6></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="mlink"  style="color: white;" href="cart_view"><h6 style="color: rgb(249, 244, 244);">Cart_Items</h6></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="mlink" style="color: white;" href="my_order"><h6 style="color: rgb(237, 234, 234);">My Orders</h6></a>
+            </li>
+             
+             
+        
+          </ul>
+          <form class="form-inline my-2 my-lg-0" method="POST" action="p_search">
+            {% csrf_token %}
+            <input class="form-control mr-sm-2" name="pnm" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav> 
+      {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+      {% endfor %}
+  {% endif %}
+  <form action="sports_items" method="POST" class="card-body">
+    {% csrf_token %}
+    
+    {% for i in view %}
+    <div class="card">
+       
+      <img  src="{{i.productimage.url}}" style=" border-radius: 10px; border: 3px solid  ;border-color: #6EE2F5;" width="100%" height="37%">
+      <div >
+        <h4 style="color: rgb(11, 8, 8);margin-top:9px; " ><b>{{i.productname}}</b></h5>
+          <div style="height: 80px;" id="scrollable">
+        <p style="color: rgb(8, 5, 5);" >{{i.productdetails}}</p></div>
+       
+
+      </div>
+       
+        <h6 style="color: rgb(25, 15, 15);" >Product amount: {{i.productamount}}</h6>
+        <h6 style="color: rgb(15, 9, 9);" >Product id: {{i.id}}</h6>
+        <h6  style="color: rgb(5, 1, 1);" >product brand: {{i.sellername}}</h6> 
+        <h6  style="color: rgb(5, 1, 1);" >seller name: {{i.seller.sellername}}</h6> 
+        <h6  style="color: rgb(17, 4, 4);" >seller  id: {{i.sellerid}}</h6>
+       
+    
+  
+      <div style="padding-bottom: 5px;">
+      <button  type="submit" style=" border-radius: 10px; background-image:url('{% static 'images/btn.jpg' %}') ;border-color: burlywood;box-shadow: yellow;"> <a href="/booking?idn={{i.id}}" class="card-link" style="color: rgb(247, 247, 247);font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">BUY NOW</a></button> 
+      <button style="border-radius: 10px; background-image:url('{% static 'images/btn.jpg' %}') ;  border-color: burlywood;box-shadow: tomato;">   <a href="/add_to_cart?idn={{i.id}}" class="card-link" style="color:  white;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">ADD TO CART</a></button>
+      </div>
+    </div>{% endfor %}</form>
+</body>
+</html>

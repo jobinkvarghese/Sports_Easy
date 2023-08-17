@@ -1,0 +1,228 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      body {
+font-family: Arial, sans-serif;
+background-color: #f5f5f5;
+}
+.container {
+max-width: 800px;
+height: 100px;
+margin: 0 auto;
+padding: 50px 20px;
+
+}
+.payment-form {
+background-color: #fff;
+border-radius: 10px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+padding: 30px;
+}
+.form-group {
+margin-bottom: 5px;
+}
+.form-group label {
+display: block;
+margin-bottom: 5px;
+font-weight: bold;
+}
+.form-group input
+{
+display: block;
+border-radius: 10px;
+width: 50%;
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 5px;
+font-size: 16px;
+}
+.form-group textarea {
+  display: block;
+border-radius: 10px;
+width: 50%;
+height: 100%;
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 5px;
+font-size: 16px;
+
+}
+.form-group select {
+display: block;
+width: 100%;
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 5px;
+font-size: 16px;
+background: #f5f5f5;
+}
+.btn-submit {
+display: block;
+background-color: #008CBA;
+color: #fff;
+border: none;
+border-radius: 5px;
+padding: 10px 20px;
+font-size: 16px;
+cursor: pointer;
+}
+
+.btn-submit:hover {
+background-color: #0077A1;
+}
+
+@media screen and (max-width: 768px) {
+.container {
+  padding: 50px 10px;
+}
+}
+label{
+  color: brown;
+}
+
+  </style>
+</head> 
+ 
+<body background="{% static 'images/Item3.jpg' %}">
+  
+ <center>
+    <form action="Save_booking" method="POST" onsubmit="return validateForm()">
+      {% csrf_token %}
+       {% for j in use %}
+      <div style="background-color: black; width: 50%;">
+      <div class="form-group">
+        <label for="name">User Name:</label>
+        <input type="text" style="text-align: center;" id="name" name="name" value="{{j.fname}}&nbsp;{{j.lname}}"/></div>
+       <div class="form-group">
+        <label for="email">User Email:</label>
+        <input type="email"style="text-align: center;" id="email" name="email" value="{{j.eml}}"/></div>
+         <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" style="text-align: center;" name="phone" value="{{j.mob}}"/></div>
+        <div class="form-group">
+        <label for="phone">Alternative Phone:</label>
+        <input type="tel" id="altphone" style="text-align: center;" name="altphone"/></div>{% endfor %}
+        {% for i in pro %}
+       <input type="number"  style="text-align: center;" name="proid" value="{{i.id}}"hidden/>
+        <div class="form-group">
+        <label for="name">Product Name</label>
+        <input type="text" id="date"  style="text-align: center;" name="proname" value="{{i.productname}}"/></div>
+        <div class="form-group">
+        <label for="price">Product Price</label>
+        <input type="number" id="proprice" style="text-align: center;" name="proprice" value="{{i.productamount}}"/></div>
+        <div class="form-group">
+        <label for="name">Seller Name</label>
+        <input type="text" id="sname" style="text-align: center;" name="sname" value="{{i.seller.sellername}}"/></div><br>
+        <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" style="text-align: center;" min="1" max="100" onChange="updateAmount()"/> </div>
+         <div class="form-group">
+        <label for="amount">Amount To Pay:</label>
+        <input type="number" id="amount" style="text-align: center;" name="amount" min="0"/></div>
+      
+      
+      
+      <div class="form-group">
+      
+        <label for="address">Address To Deliver</label>
+        <textarea id="address" name="shipaddress"></textarea></div><br>
+      
+        <button type="submit"  class="btn-submit">PAY NOW</button>
+
+      
+      
+      </div>
+        {% endfor %}   
+ 
+      </div>
+      
+      </form></center>
+      <script>
+        function updateAmount() {
+          var Price=document.getElementById("proprice").value;
+          var quantity = document.getElementById("quantity").value;
+          var amount = quantity * Price; // Or whatever calculation you need
+          document.getElementById("amount").value = amount;
+        }
+        function validateForm() {
+  var username =document.getElementById("name").value;
+  var email= document.getElementById("email").value;
+  var  phone= document.getElementById("phone").value;
+  var phones=phone.toString();
+  var Altphone= document.getElementById("altphone").value;
+  var Altphones=Altphone.toString();
+  var proname= document.getElementById("altphone").value;
+  var proprice= document.getElementById("proprice").value;
+  var sellername= document.getElementById("sname").value;
+  var qty= document.getElementById("quantity").value;
+  var Amount= document.getElementById("amount").value;
+  var daddress= document.getElementById("address").value;
+  
+  
+
+  if (email == "") {
+    alert("Email must be filled out");
+    return false;
+  } 
+  if (username == "") {
+    alert("username must be filled out");
+    return false;
+  } 
+  
+  if (!validateEmail(email)) {
+    alert("Invalid email");
+    return false;
+  }
+  
+  if (phones.length != 10) {
+    alert("phone number must have 10 digit");
+    return false;
+  }
+
+  if (Altphones.length  != 10) {
+    alert("phone number must have 10 digit");
+    return false;
+  }
+  if (proname == "") {
+    alert("productname must be filled out");
+    return false;
+  }
+  if (proprice == "") {
+    alert("product price must be filled out");
+    return false;
+  }
+  if (sellername == "") {
+    alert("sellername must be filled out");
+    return false;
+  }
+  if (qty == "") {
+    alert("quantity must be filled out");
+    return false;
+  }
+  if (Amount == "") {
+    alert("Amount to pay must be filled out");
+    return false;
+  }
+  if (daddress == "") {
+    alert("Delivery address must be filled out");
+    return false;
+  }
+  return true;
+}
+
+function validateEmail(email) {
+  var re = /\S+@\S+\.\S+/;
+  return re.test(email);
+}
+      </script>    
+ 
+      
+    
+</body>
+</html>

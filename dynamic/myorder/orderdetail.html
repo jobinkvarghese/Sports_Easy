@@ -1,0 +1,38 @@
+{% extends '../User_home.html' %}
+{% load static %} 
+
+{% block content %} 
+<div class="container">
+    <div class="row">
+        <div class="col">
+           <table class="table table-striped">
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Complaint</th>
+
+
+            </tr>
+            {% for p in order %} 
+            <tr>
+                <td>
+                    {{p.product_name}}
+                </td>
+                <td>
+                    {{p.quantity}}
+                </td>
+                <td>
+                    {{p.price}}
+                </td>
+                <td>
+                    <a href="/complaint_reg_view?ordid={{p.id}}" class="btn btn-dark">COMPLAINT</a>
+                </td>
+            </tr>
+            {% endfor %}
+           </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

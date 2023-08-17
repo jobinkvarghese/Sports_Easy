@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        .card-row {
+        display: flex;
+        justify-content: space-between;
+      }
+  
+      .card {
+        width: 40%;
+        height:1100px;
+        padding: 20px;
+        margin-left: 30%;
+        border: 3px solid #c9c9c9;
+        border-color: rgb(207, 204, 201);
+        background-image: url({% static 'images/card11.jpg' %});
+      }
+      h6{
+        color: aliceblue;
+      }
+      h5{
+        color: aliceblue;
+        margin-top: 5px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 30px;
+
+      }
+      p{
+        color: rgb(170, 170, 181);
+      }
+      #scrollable {
+			height: 900px; /* set the desired height of the division */
+			overflow: auto; /* make the division scrollable */
+		}
+
+    </style>
+</head>
+<body style="background-image: url({% static 'images/oran2.jpg' %});background-repeat:no-repeat;background-size:cover;">
+    <nav  class="navbar navbar-expand-lg navbar-light border 3px border-color white " style="background-image: url('{% static 'images/item3.jpg' %}');">
+        <a class="navbar-brand" style="color: rgb(255, 106, 20);font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" href="#">SPORTS EASY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" style="color: white;" href="user_home_view">HOME <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  style="color: white;" href="sports_items">Sports Items</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  style="color: white;" href="cart_view">Cart_Items</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  style="color: white;" href="my_order">My Orders</a>
+            </li>
+             
+            
+        
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav> 
+      {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+      {% endfor %}
+  {% endif %}
+  <form action="save_complaint" method="POST" class="card-body"  enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for i in view %}
+    <div class="card">
+     
+      <img  src="{{i.product_name.productimage.url}}" style="border: 3px solid;border-radius: 10px;border-color: rgb(240, 230, 218);" width="100%" height="35%">
+      <div >
+        
+        <h5 >{{i.productname.productname}}</h5>
+        <div  style="height: 80px;" id="scrollable">
+        <p >{{i.productname.productdetails}}</p></div>
+
+      </div>
+      <ul class="list-group list-group-flush" >
+        <h6>Product amount: {{i.product_name.productamount}}</h6>
+        <h6>Product id: {{i.product_name.id}}</h6>
+        <h6>Seller name: {{i.product_name.seller.sellername}}</h6> 
+          <h6>Seller  id: {{i.product_name.sellerid}}</h6>
+            <h6>Amount payed: {{i.price}}</h6>
+              <h6>Booking Id: {{i.id}}</h6>
+                <h6>Quantity: {{i.quantity}}</h6>
+                  <h6>Order Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="datetime" style="align-content: center;border-color: aliceblue;"  value="{{i.date_created}}"readonly></h6>
+                    <!-- <h6>Delivery Date:&nbsp;&nbsp;<input type="datetime" style="align-content: center;border-color: aliceblue;" value="{{i.arrival_date }}"></h6> -->
+        
+       
+      </ul><br>
+      <div class="form-outline mb-4">
+        <textarea  style="width:400px;height: 100px;"  name="complaint"  ></textarea>
+        <label style="color: aliceblue;"  for="form3Example1cg">COMPLAINT</label>
+      </div>
+      <div class="form-outline mb-4">
+        <input type="file" id="form3Example1cg" name="cimage"  class="form-control form-control-lg" />
+        <input type="number" id="form3Example1cg" name="idn" value="{{i.id}}"  class="form-control form-control-lg"hidden />
+      
+        <label style="color: aliceblue;" for="form3Example1cg">Proof image</label>
+      </div>
+      
+      <br>
+
+  
+      <div style="margin-left: 25%;">
+      <button  type="submit" style="border-radius: 8PX;border-color:burlywood;color: orange;  background-image: url({% static 'images/item3.jpg' %});">REGISTER</button> 
+      <button style="border-radius: 8PX;background-image: url({% static 'images/item3.jpg' %});border-color: burlywood;box-shadow: tomato;">   <a href="#" class="card-link" style="color:  rgb(245, 150, 8);font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">CANCEL COMPLAINT</a></button>
+      </div>
+    </div>{% endfor %}</form>
+</body>
+</html>

@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        .card-row {
+        display: flex;
+        margin-top: 20px;
+        
+      }
+  
+      .card {
+        width: 25%;
+        height:850px;
+        padding: 20px; 
+        float: left;
+        border-radius: 20px;
+        border: 3px solid #c9c9c9;
+        border-color: rgb(246, 128, 11);
+        background-image: url({% static 'images/card11.jpg' %});
+        
+      }
+      h6{
+        color: aliceblue;
+      }
+      h5{
+        color: aliceblue;
+        margin-top: 5px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 30px;
+
+      }
+      p{
+        color: aliceblue;
+      }
+      #scrollable {
+			height: 900px; /* set the desired height of the division */
+			overflow: auto; /* make the division scrollable */
+		}
+    </style>
+    
+</head>
+<body style="background-image: url('{% static 'images/oran2.jpg' %}');background-repeat:no-repeat;background-size:cover;">
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark" style="background-image: url('{% static 'images/item3.jpg' %}');">
+    <a class="navbar-brand" style="color: rgb(244, 100, 10);font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" href="#">SPORTS EASY</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" style="color: white;" href="itemseller_home_view">Home <span class="sr-only">(current)</span></a>
+        </li>
+       
+      
+          <li class="nav-item">
+            <a class="nav-link"  style="color: white;" href="itemseller_booking_view">View Bookings</a>
+          </li>
+          
+          
+    
+      </ul>
+    </div>
+    <form class="form-inline my-2 my-lg-0">
+      <a class="nav-link"  style="color:red;" href="/user_logout">LOGOUT</a>
+    </form>
+  </div>
+  </nav>
+      {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+      {% endfor %}
+  {% endif %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+           <table class="table table-striped">
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+
+
+            </tr>
+            {% for p in order %} 
+            <tr>
+                <td>
+                    {{p.product_name}}
+                </td>
+                <td>
+                    {{p.quantity}}
+                </td>
+                <td>
+                    {{p.price}}
+                </td>
+            </tr>
+            {% endfor %}
+           </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

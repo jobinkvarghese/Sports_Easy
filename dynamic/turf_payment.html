@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+	font-family: Arial, sans-serif;
+	background-color: #f5f5f5;
+}
+.container {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 50px 20px;
+}
+.payment-form {
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	padding: 30px;
+}
+.form-group {
+	margin-bottom: 20px;
+}
+.form-group label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+.form-group input,
+.form-group textarea {
+	display: block;
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 16px;
+}
+.form-group select {
+	display: block;
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 16px;
+	background: #f5f5f5;
+}
+.btn-submit {
+	display: block;
+	background-color: #008CBA;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.btn-submit:hover {
+	background-color: #0077A1;
+}
+
+@media screen and (max-width: 768px) {
+	.container {
+		padding: 50px 10px;
+	}
+}
+
+    </style>
+</head>
+<body>
+    <!DOCTYPE html>
+<html>
+<head>
+	<title>Payment Template</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body style="background-image: url({% static 'images/pay2.webp' %});;">
+	<div class="container">
+		<center><h1 style="color: aqua;">MAKE A PAYMENT</h1></center>
+		<div class="payment-form">
+			<form action="turf_pay" method="POST">
+				 {% csrf_token %}
+				 <input type="number" id="idn" name="idn" value="{{book.id}}" hidden/>
+				<div class="form-group">
+					<label for="card-number">Card Number</label>
+					<input type="text" id="card-number" name="card-number"  pattern="[0-9]+"   required>
+				</div>
+				<div class="form-group">
+					<label for="expiry-date">Expiry Date</label>
+					<input type="date" id="date" name="expiry-date" required>
+				</div>
+				<div class="form-group">
+					<label for="cvv">CVV</label>
+					<input type="text" id="number" name="number" pattern="[0-9]{3}" required>
+				</div>
+				<div class="form-group">
+					<label for="name-on-card">Name on Card</label>
+					<input type="text" id="name" name="name" pattern="[A-Za-z]+" required>
+				</div>
+				<div class="form-group">
+					<label for="amount">AMOUNT</label>
+					<input type="number" id="amount" name="amount" rows="3" value="{{book.amount}}"/>
+				
+				</div>
+				<button type="submit" class="btn-submit">Submit Payment</button>
+				<script>
+					var currentDate = new Date();
+					var dateString = currentDate.toISOString().split('T')[0];
+					document.getElementById("date").setAttribute("min", dateString);
+				  </script>
+
+			</form>
+		</div>
+	</div>
+</body>
+</html>
+
+</body>
+</html>

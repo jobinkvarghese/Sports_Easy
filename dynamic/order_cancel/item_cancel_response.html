@@ -1,0 +1,58 @@
+{% extends '../User_home.html' %}
+{% load static %} 
+
+{% block content %} 
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>
+                {{msg}}
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped">
+                <tr>
+              <th>userid</th>
+               <th>User Name</th>
+               <th>OrderNo</th>
+               <th>Date Created</th>
+               <th>Delivery Adress</th>
+       
+               <th>Total Price</th>
+           
+            </tr>
+
+            {% for l in data %}
+            <tr>
+                <td>
+                {{l.id}}
+            </td>
+
+            <td>
+                {{l.userid.fname}}
+            </td>
+            <td>
+               <a href="/userorderdetail?ord={{l.trackno}}" >{{l.trackno}}</a>
+            </td>
+            <td>
+                {{l.created_date}}
+            </td>
+            <td>
+                PlaceName:{{l.placename}}<br>City:{{l.city}}<br>State:{{l.state}} <br>Country:{{l.country}}
+                 <br>HouseNo:{{l.houseno}}<br>Phone:{{l.phone}}
+            </td>
+           
+            <td>
+                {{l.netprice}}
+            </td>
+       
+            </tr>
+            {% endfor %}
+        </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

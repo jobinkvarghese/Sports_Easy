@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Add Bootstrap CSS link -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Place Information Form</title>
+</head>
+<body>
+
+<div class="container mt-4">
+    <h3>
+        <a href="/sports_items" class="btn btn-warning">Back</a>
+    </h3>
+  <h2 class="text-center">Place Ording Form &nbsp;{{msg}}</h2>
+  <form action="placeorder" method="post">
+    {% csrf_token %}
+    <div class="row justify-content-center">
+        <div class="col-lg-6 p-3 border">
+            <div class="form-group">
+                <label for="placename">Total Price:</label>
+                <input type="text" name="tprice" value="{{nt}}" class="form-control" id="tprice" hidden required>
+                <input type="text" name="itemseller" value="{{itemseller}}" class="form-control" id="itemseller" hidden required>
+                {{nt}}
+              </div>
+    <div class="form-group">
+      <label for="placename">Place Name:</label>
+      <input type="text" class="form-control" name="placename" required>
+    </div>
+    <div class="form-group">
+      <label for="city">City:</label>
+      <input type="text" class="form-control" name="city" required>
+    </div>
+    <div class="form-group">
+      <label for="state">State:</label>
+      <input type="text" class="form-control" name="state" required>
+    </div>
+    <div class="form-group">
+      <label for="country">Country:</label>
+      <input type="text" class="form-control" name="country" required>
+    </div>
+    <div class="form-group">
+      <label for="landmark">Landmark:</label>
+      <input type="text" class="form-control" name="landmark">
+    </div>
+    <div class="form-group">
+        <label for="landmark">HouseNo:</label>
+        <input type="text" class="form-control" name="houseno">
+      </div>
+    <div class="form-group">
+      <label for="pincode">Pincode:</label>
+      <input type="text" class="form-control" name="pincode" required>
+    </div>
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number:</label>
+      <input type="tel" class="form-control" name="phoneNumber" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+</div>
+</div>
+
+<!-- Add Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+{% extends '../Admin_home.html' %}
+{% load static %} 
+
+{% block content %} 
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped">
+                <tr>
+              <th>userid</th>
+               <th>User Name</th>
+               <th>OrderNo</th>
+               <th>Date Created</th>
+               <th>Delivery Adress</th>
+               <th>Status</th>
+               <th>Total Price</th>
+            </tr>
+
+            {% for l in order_tables %}
+            <tr>
+                <td>
+                {{l.id}}
+            </td>
+
+            <td>
+                {{l.userid.fname}}
+            </td>
+            <td>
+               <a href="/orderdetail?ord={{l.trackno}}" >{{l.trackno}}<br>More Details</a>
+            </td>
+            <td>
+                {{l.created_date}}
+            </td>
+            <td>
+                PlaceName:{{l.placename}}<br>City:{{l.city}}<br>State:{{l.state}} <br>Country:{{l.country}}
+                 <br>HouseNo:{{l.houseno}}<br>Phone:{{l.phone}}
+            </td>
+            <td class="text-danger">
+                {{l.status}}
+                
+            </td>
+            <td>
+                {{l.netprice}}
+            </td>
+            </tr>
+            {% endfor %}
+        </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

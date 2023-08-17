@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        .card-row {
+        display: flex;
+        justify-content: space-between;
+      }
+  
+      .card {
+        width: 25%;
+        height:1000px;
+        padding: 20px;
+        margin-left: 5%;
+        float: left;
+        border-radius: 30px;
+        border: 3px solid #ffbb00e3;
+        border-color: rgb(247, 128, 9);
+        background-image: url({% static 'images/card11.jpg' %});
+      }
+      h6{
+        color: aliceblue;
+      }
+      h5{
+        color: aliceblue;
+        margin-top: 3px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 30px;
+
+      }
+      p{
+        color: aliceblue;
+      }
+      #scrollable {
+			height: 900px; /* set the desired height of the division */
+			overflow: auto; /* make the division scrollable */
+		}
+    #mlink:hover{
+        color: blue;
+        text-decoration: underline;
+      }
+    </style>
+</head>
+<body style="background-image: url('{% static 'images/oran2.jpg' %}');background-repeat:no-repeat;background-size:cover;">
+    <nav  class="navbar navbar-expand-lg navbar-light border 3px border-color white " style="background-image: url('{% static 'images/item3.jpg' %}');">
+        <a class="navbar-brand" style="color: rgb(255, 106, 20);font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" href="#">SPORTS EASY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" id="mlink" style="color: white;" href="user_home_view">HOME <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="mlink" style="color: white;" href="sports_items">Sports Items</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="mlink" style="color: white;" href="cart_view">Cart_Items</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="mlink" style="color: white;" href="my_order">My Orders</a>
+            </li>
+             
+              <li class="nav-item">
+                <a class="nav-link" id="mlink"   style="color: white;" href="complaint_view">Complaints</a>
+              </li>
+        
+          </ul>
+         
+        </div>
+      </nav> 
+      <!-- {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+      {% endfor %} -->
+  <!-- {% endif %} -->
+  
+  <form action="#" method="POST" class="card-body">
+    {% csrf_token %}
+    {% for i in view %}
+    <div class="card">
+     
+      <img  src="{{i.book.product.productimage.url}}" style="border: 3px solid;border-radius: 10px;border-color: rgb(240, 230, 218);" width="100%" height="15%">
+      <div >
+        
+        <h5 >{{i.book.product.productname}}</h5>
+        <div style="height: 80px;" id="scrollable">
+        <p >{{i.book.product.productdetails}}</p></div>
+
+      </div>
+      <ul class="list-group list-group-flush" >
+        <h6>Product amount: {{i.book.product.productamount}}</h6>
+        <h6>Product id: {{i.book.product.id}}</h6>
+        <h6>Seller name: {{i.book.product.seller.sellername}}</h6> 
+          <h6>Seller  id: {{i.book.product.sellerid}}</h6>
+            <h6>Amount payed: {{i.book.Amount}}</h6>
+              <h6>Booking Id: {{i.book.id}}</h6>
+                <h6>Quantity: {{i.book.quantity}}</h6>
+                  <h6>Order Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="datetime" style="align-content: center;border-color: aliceblue;"  value="{{i.book.order_date}}"readonly></h6>
+                    <h6>Delivery Date:&nbsp;&nbsp;<input type="datetime" style="align-content: center;border-color: aliceblue;" value="{{i.book.arrival_date }}"readonly></h6>
+                    <h6>Complaint Date:<input type="datetime" style="align-content: center;border-color: aliceblue;" value="{{i.cdate }}"readonly></h6>
+                    <h6>Complaint Description</h6>
+                    <div style="height: 80px;" id="scrollable">
+                    <p>{{i.complaint}}</p></div>
+                    <h6>Proof image</h6>
+                    {% if i.cimage %}
+                    <img  src="{{i.cimage.url}}" style="border: 3px solid;border-radius: 10px;border-color: rgb(240, 230, 218);" width="100%" height="15%"><br>
+                    {% endif %}
+                     <h6>status: {{i.status}}</h6>
+
+        
+        
+       
+      </ul>
+  
+      <div>
+     
+      </div>
+    </div>{% endfor %}</form></center>
+</body>
+</html>

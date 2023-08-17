@@ -1,0 +1,47 @@
+<!-- payment_app/templates/payment_app/checkout.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <div id="card-element">
+        <!-- A Stripe Element will be inserted here. -->
+    </div>
+
+    <button id="submit">Pay Now</button>
+
+    <script>
+        var stripe = Stripe('{{ settings.STRIPE_PUBLIC_KEY }}');
+        var elements = stripe.elements();
+
+        var cardElement = elements.create('card');
+        cardElement.mount('#card-element');
+
+        var submitButton = document.getElementById('submit');
+
+        submitButton.addEventListener('click', function(ev) {
+            stripe.confirmCardPayment(
+                "{{ client_secret }}",
+                {
+                    payment_method: {
+                        card: cardElement,
+                        billing_details: {
+                            name: 'John Doe'
+                        }
+                    }
+                }
+            ).then(function(result) {
+                if (result.error) {
+                    // Show error to your customer
+                    console.log(result.error.message);
+                } else {
+                    // The payment has been processed successfully
+                    console.log(result.paymentIntent);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

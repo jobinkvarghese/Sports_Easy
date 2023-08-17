@@ -1,0 +1,185 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Make a Post</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script></head>
+
+	<style>
+		/* your CSS code here */
+        /* basic styling */
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, sans-serif;
+	font-size: 16px;
+	line-height: 1.5;
+	background-color: #f5f5f5;
+	color: #333;
+}
+
+/* header */
+header {
+	background-color: #fff;
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+}
+
+header h1 {
+	margin: 0;
+}
+
+/* main section */
+main {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+section {
+	margin-bottom: 40px;
+}
+
+h2 {
+	font-size: 24px;
+	margin-bottom: 20px;
+}
+
+/* form styling */
+form {
+	background-color: #fff;
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+}
+
+.form-group {
+	margin-bottom: 20px;
+}
+
+label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+input[type="text"],
+textarea {
+	display: block;
+	width: 100%;
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+button[type="submit"] {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: #333;
+	color: #fff;
+	font-size: 16px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+button[type="submit"]:hover {
+	background-color: #555;
+}
+
+	</style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-dark" style="background-image: url('{% static 'images/item3.jpg' %}');">
+        <a class="navbar-brand" style="color: rgb(244, 100, 10);font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" href="#">SPORTS EASY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" style="color: white;" href="turf_home">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  style="color: white;" href="slot_add">Add Slot</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"  style="color: white;" href="slot_view">My Slots</a>
+              </li>
+            
+            
+         
+              
+        
+          </ul>
+        </div>
+        <form class="form-inline my-2 my-lg-0">
+			<a class="nav-link" id="mlink"  style="color:red;" href="/user_logout">LOGOUT</a>
+        </form>
+      </div>
+      </nav>
+	
+	  {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+      {% endfor %}
+   {% endif %}
+
+
+			<form action="slot_add" method="POST" id="myForm" >
+                {% csrf_token %}
+				<div class="form-group">
+					<label for="content">start time</label>
+					<input type="time" id="stime" name="stime" placeholder="Enter start time" required>
+                    <label for="content">end time</label>
+					<input type="time" id="etime" name="etime" placeholder="Enter end time" required>
+					<label for="content">slot amount</label>
+					<input type="number" id="samount" name="samount" placeholder="Enter amount" required>
+				</div>
+				<button type="submit">Submit</button>
+			</form>
+
+	<script>
+	
+    $(document).ready(function() {
+                          $("#myForm").submit(function(event) {
+                            event.preventDefault(); // prevent the form from submitting
+                  
+                            var stime = $("#stime").val();
+                            var etime = $("#etime").val();
+							var samount=$("#samount").val();
+
+                            
+                        
+                  
+                            // Check if all fields are filled
+                            if (stime==''||etime==''||samount=='') {
+                              alert("Please fill out all fields.");
+                              return;
+                            }
+                  
+                            // Check if email is valid
+                            
+                  
+                            // Submit the form if all validation checks pass
+                            alert("Form submitted successfully.");
+                            $("#myForm")[0].submit(); // submit the form
+                          });
+                  
+                         
+                        });
+	</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        .card-row {
+        display: flex;
+        justify-content: space-between;
+      }
+  
+      .card {
+        width: 25%;
+        height:750px;
+        padding: 40px;
+        margin-left: 10px;
+       
+        float: left;
+        border: 3px solid #c9c9c9;
+        border-color: rgb(207, 204, 201);
+        background-image: url({% static 'images/card11.jpg' %});
+      }
+      h6{
+        color: aliceblue;
+      }
+      h5{
+        color: aliceblue;
+        margin-top: 5px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 30px;
+
+      }
+      p{
+        color: aliceblue;
+      }
+      #mlink:hover{
+        color: blue;
+        text-decoration: underline;
+      }
+      #scrollable {
+			height: 900px; /* set the desired height of the division */
+			overflow: auto; /* make the division scrollable */
+		}
+    </style>
+    
+</head>
+<body style="background-image: url('{% static 'images/oran2.jpg' %}');background-repeat:no-repeat;background-size:cover;">
+    <nav  class="navbar navbar-expand-lg navbar-light border 3px border-color white " style="background-image: url('{% static 'images/item3.jpg' %}');">
+        <a class="navbar-brand" style="color: rgb(255, 106, 20);font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" href="#">SPORTS EASY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" id="mlink" style="color: white;" href="user_home_view">HOME <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="mlink" style="color: white;" href="sports_items">Sports Items</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="mlink"  style="color: white;" href="cart_view">Cart_Items</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="mlink" style="color: white;" href="my_order">My Orders</a>
+            </li>
+             
+              <li class="nav-item">
+                <a class="nav-link" id="mlink"  style="color: rgb(250, 250, 250);" href="complaint_view">Complaints</a>
+              </li>
+        
+          </ul>
+        </div>
+      </nav> 
+      {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <h7 style="color: brown;">{{ message }}</h7>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+      {% endfor %}
+  {% endif %}
+  
+  <form action="#" method="POST" class="card-body">
+    {% csrf_token %}
+    {% for i in view %}
+    <div class="card">
+     
+      <img  src="{{i.product.productimage.url}}" style="border: 3px solid;border-radius: 10px;border-color: rgb(240, 230, 218);" width="100%" height="20%">
+      <div >
+        
+        <h5 >{{i.product.productname}}</h5>
+        <div style="height: 80px;" id="scrollable">
+        <p >{{i.product.productdetails}}</p></div>
+
+      </div>
+      <ul class="list-group list-group-flush" >
+        <h6>Product amount: {{i.product.productamount}}</h6>
+        <h6>Product id: {{i.product.id}}</h6>
+        <h6  >product brand: {{i.product.sellername}}</h6> 
+        <h6>Seller name: {{i.product.seller.sellername}}</h6> 
+          <h6>Seller  id: {{i.product.sellerid}}</h6>
+            <h6>Amount payed: {{i.Amount}}</h6>
+              <h6>Booking Id: {{i.id}}<br>
+                <a href="/order_detail?bkid={{i.id}}">Order Tracking</a></h6>
+                <h6>Quantity: {{i.quantity}}</h6>
+                  <h6>Order Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="datetime" style="align-content: center;border-color: aliceblue;"  value="{{i.order_date}}"readonly></h6>
+                    <h6>Delivery Date:&nbsp;&nbsp;<input type="datetime" style="align-content: center;border-color: aliceblue;" value="{{i.arrival_date }}"readonly></h6>
+                    <h6>Status: {{i.status}}</h6>
+       
+      </ul><br>
+  
+      <div>
+      <button  type="button" style="border-radius: 8PX;background-image: url({% static 'images/item3.jpg' %});border-color: burlywood;box-shadow: yellow;"> <a href="/cancel_booking_sports_item?idn={{i.id}}" class="card-link" style="color: rgb(233, 137, 19);font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">CANCEL BOOKING</a></button> 
+      <button type="button" style="border-radius: 8PX;background-image: url({% static 'images/item3.jpg' %});border-color: burlywood;box-shadow: tomato;">   <a href="/complaint_reg_view?idn={{i.id}}" class="card-link" style="color:  rgb(245, 150, 8);font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">COMPLAINT</a></button>
+      </div>
+      <div>
+       
+      </div>
+    </div>{% endfor %}</form></center>
+</body>
+</html>

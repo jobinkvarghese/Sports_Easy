@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        .card-row {
+        display: flex;
+        justify-content: space-between;
+      }
+  
+      .card {
+        width: 100%;
+        height:auto;
+        
+        border: 3px solid #c9c9c9;
+        border-color: #110f12;
+      background-color: aliceblue;
+        
+        border-radius: 7px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+        float: left;
+      }
+      h6{
+        color: aliceblue;
+        font-weight: bolder;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      }
+    </style>
+</head>
+<body style="background-color: black; background-image: url({% static 'images/btn.jpg' %}); background-repeat:no-repeat;background-size:cover">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark" style="background-image: url('{% static 'images/item3.jpg' %}');">
+        <a class="navbar-brand" style="color: rgb(244, 100, 10);font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" href="#">SPORTS EASY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" style="color: white;" href="user_home_view">Home<span class="sr-only">(current)</span></a>
+            </li>
+            
+         
+              
+        
+          </ul>
+        </div>
+        <form class="form-inline my-2 my-lg-0">
+          <a class="nav-link"  style="color:red;" href="logout_view">LOGOUT</a>
+        </form>
+      </div>
+      </nav>
+      {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+      {% endfor %}
+  {% endif %}
+  <form action="#" method="POST" class="card-body">
+    {% csrf_token %}
+    
+    {% for i in view %}
+    <div class="card">
+    <div  style="margin-left: 30%;">
+      <div >
+        <h4 style="color:red;margin-top:10px;margin-left: 10px; " ><b>Name:{{i.fname}}&nbsp;{{i.lname}}</b></h5>
+        <h6 style="color: rgb(25, 15, 15);margin-top: 10px;font-size: 20px;" >Address: {{i.ad}}</h6>
+        <h6 style="color: rgb(15, 9, 9);margin-top: 10px;font-size: 20px;" >Academy id: {{i.id}}</h6>
+        <h6 style="color: rgb(15, 9, 9);margin-top: 10px;font-size: 20px;" >Mobile: {{i.mob}}</h6>
+        <h6 style="color: rgb(15, 9, 9);margin-top: 10px;font-size: 20px;" >Email: {{i.eml}}</h6>
+        <h6 style="color: rgb(15, 9, 9);margin-top: 10px;font-size: 20px;" >Age: {{i.ag}}</h6>
+
+
+
+        
+       
+    
+    <br>
+    </div>
+    </div>{% endfor %}</form>
+</body>
+</html>

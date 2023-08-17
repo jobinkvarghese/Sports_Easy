@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        .card-row {
+        display: flex;
+        justify-content: space-between;
+      }
+  
+      .card {
+        width: 33.33%;
+        height:900px;
+        
+        border: 5px solid #130606;
+        border-color: #110f12;
+      background-color: aliceblue;
+        
+        border-radius: 7px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+        float: left;
+      }
+      h6{
+        color: rgb(226, 37, 8);
+      }
+    </style>
+</head>
+<body style="background-color: black; background-image: url({% static 'images/btn.jpg' %}); background-repeat:no-repeat;background-size:cover">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark" style="background-image: url('{% static 'images/item3.jpg' %}');">
+        <a class="navbar-brand" style="color: rgb(244, 100, 10);font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" href="#">SPORTS EASY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" style="color: white;" href="user_home_view">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  style="color: white;" href="User_academy_view">Academy</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  style="color: white;" href="My_addmision_view">My Addmission</a>
+            </li>
+            
+           
+         
+              
+        
+          </ul>
+        </div>
+        <form class="form-inline my-2 my-lg-0">
+          <a class="nav-link" id="mlink" style="color:red;" href="user_logout">LOGOUT</a>
+        </form>
+        <div>
+            <form class="form-inline my-2 my-lg-0" method="POST" action="academy_search">
+              {% csrf_token %}
+                <select id="dist" style="border-radius: 10px;height: 50px;width: 200px;" name="dist">
+                    <option value="">select district</option>
+                  <option value="kasargode">kasargode</option>
+                 <option value="kannur">kannur</option>
+                  <option value="kozhikode">kozhikode</option>
+                  <option value="malappuram">malappuram</option>
+                  <option value="palakkad">palakkad</option>
+                  <option value="thrissur">thrissur</option>
+                  <option value="ernamkulam">ernamkulam</option>
+                  <option value="idukki">idukki</option>
+                  <option value="wayanad">wayanad</option>
+                  <option value="Alapuzha">Alapuzha</option>
+                  <option value="kottayam">kottayam</option>
+                  <option value="pathanamthitta">pathanamthitta</option>
+                  <option value="kollam">kollam</option>
+                  <option value="trivandram">trivandram</option>
+              </select>
+              <input type="submit" style="color: rgb(174, 57, 7);border-radius: 10px;" value="Go"/>
+    
+            </form>
+         </div>
+      </div>
+      </nav>
+      {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+      {% endfor %}
+  {% endif %}
+  <form action="#" method="POST" class="card-body">
+    {% csrf_token %}
+    
+    {% for i in view %}
+    <div class="card">
+
+      <img  src="{{i.Aimg.url}}" style=" border-radius: 15px;margin-top: 10px; border: 3px solid  ;border-color: #6EE2F5;" width="100%" height="35%">
+    
+      <div >
+        <h4 style="color: rgb(105, 6, 6);margin-top:10px;margin-left: 15%; " ><b>{{i.Aname}}</b></h5>
+      
+        <p style="color: black;  font-size: 20px; /* Change to your desired font size */
+        line-height: 1.5; /* Change to your desired line height */
+        margin-bottom: 1em;  text-align: justify;"  >"{{i.Adetails}}"</p>
+       
+       
+
+      </div><br>  <div style="margin-left: 30px;">
+       
+        <h6 style="color: rgb(25, 15, 15);margin-top: 10px;font-size: 20px;" > Address: {{i.Address}}</h6>
+        <h6 style="color: rgb(15, 9, 9);margin-top: 10px;font-size: 20px;" >Academy District: {{i.dist}}</h6>
+        <h6 style="color: rgb(15, 9, 9);margin-top: 10px;font-size: 20px;" >Academy id: {{i.id}}</h6>
+        <h6 style="color: rgb(15, 9, 9);margin-top: 10px;font-size: 20px;" >Mobile: {{i.Amob}}</h6>
+        <h6 style="color: rgb(15, 9, 9);margin-top: 10px;font-size: 20px;" >Email: {{i.Aemail}}</h6>
+        <h6 style="color: rgb(15, 9, 9);margin-top: 10px;font-size: 20px;" >Academy Location: <a href="{{i.Aloc}}" >{{i.Aloc}}</a></h6>
+        <h6 style="color: rgb(15, 9, 9);margin-top: 10px;font-size: 20px;" >Academy Status: {{i.status}}</h6>
+
+
+        
+       
+    
+    <br>
+      <div style="padding-bottom: 5px;margin-left: 30%;"> 
+      <button style="border-radius: 10px;  background-image:url('{% static 'images/btn.jpg' %}') ;  border-color: burlywood;box-shadow: tomato;"><a href="/Admission_form_view?idn={{i.id}}&status={{i.status}}" style="color: #130606;">TAKE ADMISSION</a></button>
+      </div>
+    </div>
+    </div>{% endfor %}</form>
+</body>
+</html>

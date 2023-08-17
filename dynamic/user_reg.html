@@ -1,0 +1,384 @@
+{% load static %}
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="crossorigin="anonymous"></script>
+  </head>
+<link rel="stylesheet" href="{% static 'css/user_reg.css' %}">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light " style="background-image: url({% static 'images/item3.jpg' %});background-repeat:no-repeat;background-size:cover;">
+  <!-- Container wrapper -->
+  <div class="container">
+    <!-- Navbar brand -->
+
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarButtonsExample"
+      aria-controls="navbarButtonsExample"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarButtonsExample">
+      <!-- Left links -->
+   
+
+      <div >
+        <a href="User_login" style="color:rgb(245, 242, 242);font-size: 20px; ">
+          LOGIN
+        </a>
+    
+       
+      </div>
+    </div>
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <h3 class="mb-5 text-uppercase" >User registration form</h3>
+    </div>
+  </div>
+  <div class="row justify-content-center p-4 mt-3 border">
+    <div class="col-lg-12">
+     
+      <form action="User_reg" id="myForm" method="POST">
+      {% csrf_token %}
+      
+       <div class="row">
+         <div class="col-md-6">
+           <div class="form-outline">
+             <input type="text" name="fname" id="fname"  value="{{ request.POST.fname }}" class="form-control form-control-lg" />
+             <label class="form-label" for="form3Example1m" >First name</label>
+             <span id="sfname"></span>
+           </div>
+         </div>
+
+         <div class="col-md-6">
+           <div class="form-outline">
+             <input type="text" name="Lname" id="lname"   value="{{ request.POST.Lname }}" class="form-control form-control-lg" />
+             <label class="form-label"  for="form3Example1n">Last name</label>
+             <span id="slname"></span>
+           </div>
+         </div>
+       
+
+     
+         <div class="col-md-6">
+           <div class="form-outline">
+             <input type="text" id="mobile"  value="{{ request.POST.mob }}" name="mob" class="form-control form-control-lg" />
+             <label class="form-label"  for="form3Example1m1">Mobile Number</label>
+             <span id="smb"></span>
+           </div>
+         </div>
+         <div class="col-md-6">
+           <div class="form-outline">
+             <input type="text" name="Age" id="age"  value="{{ request.POST.Age }}" class="form-control form-control-lg" />
+             <label class="form-label"  for="form3Example1n1">Age</label>
+             <span id="sage"></span>
+           </div>
+         </div>
+       
+         <div class="col-md-12">
+       <div class="form-outline">
+         <textarea name="Address"  value="{{ request.POST.Address }}" id="address" class="form-control" >
+          </textarea>
+         <label class="form-label"  for="form3Example8">Address</label>
+         <span id="saddress"></span>
+       </div>
+       </div>
+<div class="col-lg-12">
+       <div class="d-md-flex justify-content-start align-items-center py-2">
+
+         <h6 class="mb-0 me-4" >Gender: </h6>
+
+         <div class="form-check form-check-inline mb-0 me-4">
+           <input class="form-check-input" name="Gender" type="radio"  id="femaleGender"
+             value="Female" />
+           <label class="form-check-label" for="femaleGender" >Female</label>
+         </div>
+
+         <div class="form-check form-check-inline mb-0 me-4">
+           <input class="form-check-input" type="radio" name="Gender"  id="maleGender"
+             value="Male" />
+           <label class="form-check-label" for="maleGender" >Male</label>
+         </div>
+
+         <div class="form-check form-check-inline mb-0">
+           <input class="form-check-input" type="radio" name="Gender"  id="otherGender"
+             value="others" />
+           <label class="form-check-label" for="otherGender" >other</label>
+           <span id="sgen"></span>
+         </div>
+</div>
+
+</div>
+
+ 
+
+ <div class="col-lg-12">  
+
+
+
+       <div class="form-outline">
+         <input type="password" name="password" id="ps1" class="form-control form-control-lg" />
+         <label class="form-label" for="form3Example90" >Password</label>
+         
+       </div>
+
+       <div class="form-outline">
+         <input type="password" id="ps2" name="c_password"  class="form-control form-control-lg" />
+         <label class="form-label" for="form3Example99" >Confirm password</label>
+         <span id="sps1"></span>
+       </div>
+
+       <div class="form-outline">
+         <input type="text" id="email" name="email"  value="{{ request.POST.email }}" class="form-control form-control-lg" />
+         <label class="form-label" for="form3Example97" >Email ID</label>
+         <span id="semail"></span>
+       </div>
+      </div>   
+
+      <div class="col-lg-12">
+       <div class="d-flex justify-content-end pt-3">
+         <a href="User_reg" class="btn btn-light btn-lg" >Reset all</a>&nbsp;
+         <button type="submit" class="btn btn-warning btn-lg ms-2">Submit form</button>
+       </div>
+
+      </div>
+   </div>
+ </form>
+ <script>
+   $(function(){
+      var e_fname=false;
+      var e_lname=false;
+      var e_age=false;
+      var e_address=false;
+      var  e_email=false;
+      var e_mob=false;
+     var e_pass=false;
+     var e_gen=false;
+     
+       $('#sfname').hide();
+       $('#smb').hide();
+       $('#sage').hide();
+       $('#saddress').hide();
+       $('#semail').hide();
+       $('#sps1').hide();
+       $('#slname').hide();
+       $('#sgen').hide();
+
+       $('#fname').focusout(function(){error_fname()});
+       $('#otherGender').focusout(function(){error_gender()});
+       $('#lname').focusout(function(){error_lname()});
+       $('#age').focusout(function(){error_age()});
+       $('#email').focusout(function(){error_email()});
+       $('#address').focusout(function(){error_address()});
+       $('#mobile').focusout(function(){error_mobile()});
+       $('#ps2').focusout(function(){error_password()});
+       function error_fname(){
+           var fnm = $('#fn').val();
+           const regnm = /^[A-Z a-z]+/;
+           if(!regnm.test(fnm)|| fnm==''){
+               $('#sfn').html("Only Alphabets allowed!..");
+               $('#sfn').show();
+               $('#sfn').css('color','#ff0000');
+               $('#fn').css('border-bottom-color','#ff0000');
+               e_fname=true;
+
+           }
+           else{
+               $('#sfn').hide();
+               $('#fn').css('border-bottom-color','#008000');
+
+           }
+
+
+       }
+       function error_lname(){
+           var lnm = $('#lname').val();
+           const regnm = /^[A-Z a-z]+/;
+           if(!regnm.test(lnm) || lnm=='' ){
+               $('#slname').html("Only Alphabets allowed!..");
+               $('#slname').show();
+               $('#slname').css('color','#ff0000');
+               $('#lname').css('border-bottom-color','#ff0000');
+               e_lname=true;
+
+           }
+           else{
+               $('#slname').hide();
+               $('#lname').css('border-bottom-color','#008000');
+
+           }
+
+
+       }
+       function error_gender(){
+         if ($('#maleGender:checked').length == 0 && $('#femaleGender:checked').length == 0 && $('#otherGender:checked').length == 0) {
+           $('#sgen').html("please select gender..");
+               $('#sgen').show();
+               $('#sgen').css('color','#ff0000');
+               $('#maleGender').css('border-bottom-color','#ff0000');
+               e_gen=true;
+        } else {
+             $('#sgen').hide();
+               $('#Gender').css('border-bottom-color','#008000');
+           }
+
+       }
+       function error_address(){
+           var adr = $('#address').val();
+           if(adr==''){
+               $('#saddress').html("Address is empty..");
+               $('#saddress').show();
+               $('#saddress').css('color','#ff0000');
+               $('#address').css('border-bottom-color','#ff0000');
+               e_address=true;
+
+           }
+           else{
+               $('#saddress').hide();
+               $('#address').css('border-bottom-color','#008000');
+
+           }
+
+
+       }
+       function error_age(){
+           var age= $('#age').val();
+           const regmb = /^[0-9]+$/;
+           if(!regmb.test(age) || age=='' ){
+               $('#sage').html("Please enter age correctly!..");
+               $('#sage').show();
+               $('#sage').css('color','#ff0000');
+               $('#age').css('border-bottom-color','#ff0000');
+               e_age=true;
+
+           }
+           else{
+               $('#sage').hide();
+               $('#age').css('border-bottom-color','#008000');
+
+           }
+
+
+       }
+       function error_email(){
+           var eml = $('#email').val();
+           const regnm = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+           if(!regnm.test(eml) ||eml==''){
+               $('#semail').html("please enter email correctly!..");
+               $('#semail').show();
+               $('#semail').css('color','#ff0000');
+               $('#email').css('border-bottom-color','#ff0000');
+               e_email=true;
+
+           }
+           else{
+               $('#semail').hide();
+               $('#email').css('border-bottom-color','#008000');
+
+           }
+
+
+       }
+     
+       function error_mobile(){
+           var mob = $('#mobile').val();
+           const regmb = /^[0-9]+$/;
+           if(!regmb.test(mob) || mob==''){
+               $('#smb').html("not allowed white space and other charchers ..");
+               $('#smb').show()
+               $('#smb').css('color','#ff0000');
+               $('#mobile').css('border-bottom-color','#ff0000');
+               e_mob=true;
+
+           }
+           else if(mob.length!=10){
+               $('#smb').html("Only 10 digits allowed!..");
+               $('#smb').show();
+               $('#smb').css('color','#ff0000');
+               $('#mobile').css('border-bottom-color','#ff0000');
+               e_mob=true;
+
+           }
+           else{
+               $('#smb').hide();
+               $('#mobile').css('border-bottom-color','#008000');
+
+           }
+
+       }
+       function error_password(){
+           var pass1 = $('#ps1').val();
+           var pass2 = $('#ps2').val();
+           if(pass1!=pass2){
+               $('#sps1').html("Passwords mismatch");
+               $('#sps1').show()
+               $('#sps1').css('color','#ff0000');
+               $('#ps1').css('border-bottom-color','#ff0000');
+               e_pass=true;
+
+           }
+           else{
+               $('#sps1').hide();
+               $('#ps1').css('border-bottom-color','#008000');
+           }
+
+       }
+       $("#myForm").submit(function(){
+        e_fname=false;
+       e_lname=false;
+       e_age=false;
+       e_address=false;
+        e_email=false;
+       e_mob=false;
+      e_pass=false;
+      e_gen=false;
+      error_fname();
+       error_lname();
+       error_email();
+       error_age();
+       error_gender();
+       error_address();
+      error_mobile();
+      error_password();
+      if(e_fname==false&&e_lname==false&&e_age==false&&e_address==false&&e_email==false&&e_mob==false&&e_pass==false&&e_gen==false)
+      {
+       alert("registeration successfull")
+       return true;
+      }
+      else{
+      alert("fill form correctly....")
+      return false;
+      }
+
+
+
+       })
+
+      
+
+
+   });
+</script>
+
+
+    </div>
+  </div>
+</div>
+
+                 
